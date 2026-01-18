@@ -8,42 +8,49 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var currentAmount = 0.0
-    @State private var finalAmount = 1.0
-    
-    @State private var currentAngleAmount = Angle.zero
-    @State private var finalAngleAmount = Angle.zero
+//    @State private var currentAmount = 0.0
+//    @State private var finalAmount = 1.0
+//    
+//    @State private var currentAngleAmount = Angle.zero
+//    @State private var finalAngleAmount = Angle.zero
     
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-                .scaleEffect(finalAmount + currentAmount)
-                .rotationEffect(currentAngleAmount + finalAngleAmount)
-                .gesture(
-//                    MagnifyGesture()
+//            Image(systemName: "globe")
+//                .imageScale(.large)
+//                .foregroundStyle(.tint)
+//            Text("Hello, world!")
+//                .scaleEffect(finalAmount + currentAmount)
+//                .rotationEffect(currentAngleAmount + finalAngleAmount)
+//                .gesture(
+////                    MagnifyGesture()
+////                        .onChanged {value in
+////                            currentAmount = value.magnification - 1
+////                        }
+////                        .onEnded {value in
+////                            finalAmount += currentAmount
+////                            currentAmount = 0.0
+////                        }
+//                    
+//                    RotateGesture()
 //                        .onChanged {value in
-//                            currentAmount = value.magnification - 1
+//                            currentAngleAmount = value.rotation
 //                        }
 //                        .onEnded {value in
-//                            finalAmount += currentAmount
-//                            currentAmount = 0.0
+//                            finalAngleAmount += currentAngleAmount
+//                            currentAngleAmount = .zero
 //                        }
-                    
-                    RotateGesture()
-                        .onChanged {value in
-                            currentAngleAmount = value.rotation
-                        }
-                        .onEnded {value in
-                            finalAngleAmount += currentAngleAmount
-                            currentAngleAmount = .zero
-                        }
-                        
-                )
+//                        
+//                )
+            
+            Text("For double gestures, use two different ones")
+                .onTapGesture {
+                    print("tap on text")
+                }
         }
-        .padding()
+        .highPriorityGesture(TapGesture().onEnded {
+            print("tap on background")
+        })
     }
 }
 
