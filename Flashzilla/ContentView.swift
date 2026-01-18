@@ -48,11 +48,11 @@ struct ContentView: View {
                     print("tap on text")
                 }
         }
-        .highPriorityGesture(TapGesture().onEnded {
+        .simultaneousGesture(TapGesture().onEnded {
             print("tap on background")
         })
     }
-}
+} 
 
 #Preview {
     ContentView()
