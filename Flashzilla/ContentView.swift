@@ -18,33 +18,56 @@ struct ContentView: View {
     @State private var isDraging = false
     
     var body: some View {
-        let dragGesture = DragGesture().onChanged({ value in
-            offset = value.translation
-        }).onEnded  { _ in
-            withAnimation {
-                offset = .zero
-                isDraging = false
-            }
+        ZStack {
+            Rectangle()
+                .fill(Color.blue)
+                .frame(width: 300, height: 300)
+                .onTapGesture {
+                    print("Rectangle tapped")
+                }
+            Circle()
+                .fill(.red)
+                .frame(width: 300, height: 300)
+                .onTapGesture {
+                    print("Circle tapped")
+                }
+                .allowsHitTesting(false)
         }
-                   
-        let pressGesture = LongPressGesture()
-            .onEnded { value in
-            withAnimation {
-                isDraging = true
-            }
-        }
         
-        let combined = pressGesture.sequenced(before: dragGesture)
         
-        Circle()
-             .fill(Color.blue)
-             .frame(width: 64, height: 64)
-             .scaleEffect(isDraging ? 1.5 : 1.0)
-             .offset(offset)
-             .gesture(combined)
         
-//        VStack {
-////            Image(systemName: "globe")
+        
+        
+        
+        
+        
+//        let dragGesture = DragGesture().onChanged({ value in
+//            offset = value.translation
+//        }).onEnded  { _ in
+//            withAnimation {
+//                offset = .zero
+//                isDraging = false
+//            }
+//        }
+//                   
+//        let pressGesture = LongPressGesture()
+//            .onEnded { value in
+//            withAnimation {
+//                isDraging = true
+//            }
+//        }
+//        
+//        let combined = pressGesture.sequenced(before: dragGesture)
+//        
+//        Circle()
+//             .fill(Color.blue)
+//             .frame(width: 64, height: 64)
+//             .scaleEffect(isDraging ? 1.5 : 1.0)
+//             .offset(offset)
+//             .gesture(combined)
+//        
+////        VStack {
+//////            Image(systemName: "globe")
 ////                .imageScale(.large)
 ////                .foregroundStyle(.tint)
 ////            Text("Hello, world!")
