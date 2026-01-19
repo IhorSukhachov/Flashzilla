@@ -17,6 +17,10 @@ struct ContentView: View {
                 print("The time is now \(time)")
             }
     }
+    
+    func cancelTimer() {
+        timer.upstream.connect().cancel()
+    }
 }
 
 #Preview {
