@@ -8,6 +8,14 @@
 import SwiftUI
 internal import Combine
 
+func withOptionalAnimation<Result>(_ animation: Animation? = .default, _ body: () throws -> Result) rethrows -> Result {
+    if UIAccessibility.isReduceMotionEnabled {
+        return try body()
+    } else {
+        return try withAnimation(animation, body)
+    }
+}
+
 struct ContentView: View {
     let timer = Timer.publish(every: 1, tolerance: 0.5, on: .main, in: .common).autoconnect()
     
@@ -49,15 +57,10 @@ struct ContentView: View {
 //                count += 1
 //            }
         Button("Hello world") {
-             if accessibilityReduceMotion {
-                 scale *= 1.5
-             } else {
-                 withAnimation {
+                 withOptionalAnimation {
                      scale *= 1.5
                  }
              }
-            
-        }
         .scaleEffect(scale)
     }
     
