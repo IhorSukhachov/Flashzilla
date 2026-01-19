@@ -13,6 +13,9 @@ struct ContentView: View {
     
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.accessibilityDifferentiateWithoutColor) var accessibilityDifferentiateWithoutColor: Bool
+    @Environment(\.accessibilityReduceMotion) var accessibilityReduceMotion: Bool
+    
+    @State private var scale = 1.0
     
     @State private var count = 0
 
@@ -45,6 +48,17 @@ struct ContentView: View {
 //                }
 //                count += 1
 //            }
+        Button("Hello world") {
+             if accessibilityReduceMotion {
+                 scale *= 1.5
+             } else {
+                 withAnimation {
+                     scale *= 1.5
+                 }
+             }
+            
+        }
+        .scaleEffect(scale)
     }
     
 //    func cancelTimer() {
