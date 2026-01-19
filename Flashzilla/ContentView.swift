@@ -22,6 +22,7 @@ struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     @Environment(\.accessibilityDifferentiateWithoutColor) var accessibilityDifferentiateWithoutColor: Bool
     @Environment(\.accessibilityReduceMotion) var accessibilityReduceMotion: Bool
+    @Environment(\.accessibilityReduceTransparency) var accessibilityReduceTransparency: Bool
     
     @State private var scale = 1.0
     
@@ -62,6 +63,12 @@ struct ContentView: View {
                  }
              }
         .scaleEffect(scale)
+        
+        Text("Reduce transparency testing")
+            .padding()
+            .background(accessibilityReduceTransparency ? .black : .black.opacity(0.5))
+            .foregroundStyle(.white)
+            .clipShape(.capsule)
     }
     
 //    func cancelTimer() {
