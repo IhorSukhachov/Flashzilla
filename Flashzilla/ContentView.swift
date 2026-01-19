@@ -11,18 +11,29 @@ internal import Combine
 struct ContentView: View {
     let timer = Timer.publish(every: 1, tolerance: 0.5, on: .main, in: .common).autoconnect()
     
+    @Environment(\.scenePhase) var scenePhase
+    
     @State private var count = 0
 
     var body: some View {
         Text("Hello world")
-            .onReceive(timer) {time in
-                if count == 5 {
-                    timer.upstream.connect().cancel()
-                } else {
-                    print("The time is now \(time)")
+            .onChange(of: scenePhase) { oldPhase, newPhase in
+                if newPhase == .active {
+                    print("Active")
+                } else if newPhase == .inactive {
+                    print("Inactive")
+                } else if newPhase == .background {
+                    print("Background")
                 }
-                count += 1
             }
+//            .onReceive(timer) {time in
+//                if count == 5 {
+//                    timer.upstream.connect().cancel()
+//                } else {
+//                    print("The time is now \(time)")
+//                }
+//                count += 1
+//            }
     }
     
 //    func cancelTimer() {
